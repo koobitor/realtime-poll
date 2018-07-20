@@ -24,5 +24,36 @@ class IndexPage extends Component {
 export default () => (
   <Fragment>
     <IndexPage />
+    <style global jsx>{`
+
+      .custom-control-label {
+        background: transparent;
+        color: #999;
+        font-size: 2rem;
+        font-weight: 500;
+        cursor: pointer;
+        line-height: 2.25rem;
+      }
+
+      .custom-control-label:before, .custom-control-label:after {
+        top: 0;
+        left: -10px;
+        height: 2.25rem;
+        width: 2.25rem;
+        cursor: pointer;
+        box-shadow: none !important;
+      }
+
+      .custom-control-label.checked {
+        color: #007bff !important;
+      }
+
+      button.btn {
+        letter-spacing: 1px;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+    `}</style>
   </Fragment>
 )
