@@ -3,6 +3,37 @@ import Layout from '../components/Layout'
 
 class IndexPage extends Component {
 
+  state = { answers: {} }
+
+  componentDidMount() {
+
+    this.pusher = new Pusher(process.env.PUSHER_APP_KEY, {
+      cluster: process.env.PUSHER_APP_CLUSTER,
+      encrypted: true
+    })
+
+    this.channel = this.pusher.subscribe('poll-board')
+
+    this.channel.bind('new-answer', ({ choice, count }) => {
+      let { answers } = this.state
+      answers = { ...answers, [choice]: count }
+      this.setState({ answers })
+    })
+
+    this.pusher.connection.bind('connected', () => {
+      axios.post('/answers')
+        .then(response => {
+          const answers = response.data.answers
+          this.setState({ answers })
+        })
+    })
+
+  }
+
+  componentWillUnmount() {
+    this.pusher.disconnect()
+  }
+
   render() {
     return (
       <Layout pageTitle="Realtime Poll">
