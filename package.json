@@ -1,0 +1,8 @@
+{
+  "name": "realtime-poll",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@bitbucket.org:koobitor/realtime-poll.git",
+  "author": "Sakol Assawasagool <koobitor@gmail.com>",
+  "license": "MIT"
+}
