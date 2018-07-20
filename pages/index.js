@@ -1,4 +1,8 @@
 import React, { Component, Fragment } from 'react'
+import axios from 'axios'
+import Pusher from 'pusher-js'
+import Poll from '../components/Poll'
+import Stats from '../components/Stats'
 import Layout from '../components/Layout'
 
 class IndexPage extends Component {
@@ -35,14 +39,23 @@ class IndexPage extends Component {
   }
 
   render() {
+    const question = `What do you think about this course?`
+    const choices = ['Excellent', 'Good', 'Average', 'Fair', 'Poor']
+
     return (
       <Layout pageTitle="Realtime Poll">
         <main className="container-fluid position-absolute h-100 bg-light">
           <div className="row position-absolute w-100 h-100">
 
-            <section className="col-md-7 d-flex flex-row flex-wrap align-items-center align-content-center px-5 border-right border-gray"></section>
+            <section className="col-md-7 d-flex flex-row flex-wrap align-items-center align-content-center px-5 border-right border-gray">
+              <div className="px-5 mx-5">
+                <Poll question={question} choices={choices} />
+              </div>
+            </section>
 
-            <section className="col-md-5 position-relative d-flex flex-wrap h-100 align-items-start align-content-between bg-white px-0"></section>
+            <section className="col-md-5 position-relative d-flex flex-wrap h-100 align-items-start align-content-between bg-white px-0">
+              <Stats choices={choices} stats={this.state.answers} />
+            </section>
 
           </div>
         </main>
